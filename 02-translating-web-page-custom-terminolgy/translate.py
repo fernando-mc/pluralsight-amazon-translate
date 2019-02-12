@@ -1,5 +1,3 @@
-# pip3 install beautifulsoup4 boto3 requests
-
 import boto3
 import urllib
 from bs4 import BeautifulSoup
