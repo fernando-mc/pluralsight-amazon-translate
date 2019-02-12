@@ -1,0 +1,1 @@
+# pluralsight-amazon-translate
