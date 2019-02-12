@@ -6,9 +6,6 @@ def translate_text(text, lang_code):
     translate = boto3.client('translate')
     result = translate.translate_text(
         Text=text,
-        TerminologyNames=[
-            'CloudFreeCustom',
-        ],
         SourceLanguageCode='auto',
         TargetLanguageCode=lang_code
     )
