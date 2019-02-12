@@ -14,6 +14,11 @@ def translate_text(text, lang_code):
         SourceLanguageCode='auto',
         TargetLanguageCode=lang_code
     )
+    print(
+        'Translated text into the language code of ' + lang_code + '.' +
+        '\nSource text: "' + text + '"' + 
+        '\nResult text: "' + result['TranslatedText'] + '"\n'
+        )
     return result['TranslatedText']
 
 def created_translated_webpage(html, to_lang_code):
@@ -24,6 +29,7 @@ def created_translated_webpage(html, to_lang_code):
     output_file = './website/index_' + to_lang_code + '.html'
     with open(output_file, "w") as file:
         file.write(str(soup))
+    print('Finished translating HTML into the language code of: ' + to_lang_code + '\n\n')
 
 with urllib.request.urlopen('http://globotranslatetest1123.s3-website-us-east-1.amazonaws.com/') as f:
     page_html = f.read().decode('utf-8')
