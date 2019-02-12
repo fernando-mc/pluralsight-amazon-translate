@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Globomantics</title>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.283.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" />
+    <link href="main.css" rel="stylesheet" />
+</head>
+
+<body>
+    
+    <h1 style="text-align: center"> <img src="./globo.png"> Globomantics Internal Translation Service</h1>
+    <br/>
+    <table class="tg">
+        <tr>
+            <th align="left">
+Source Language Code:
+                <select id="sourceLanguageCodeDropdown">
+                      <option value="en">en</option>
+                      <option value="de">de</option>
+                      <option value="es">es</option>
+                      <option value="pt">pt</option>
+                </select>
+            </th>
+            <th align="left">
+Target Language Code:
+                <select id="targetLanguageCodeDropdown">
+                      <option value="en">en</option>
+                      <option value="de">de</option>
+                      <option value="es">es</option>
+                      <option value="pt">pt</option>
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <textarea id="inputText" name="inputText" rows="10" cols="50" placeholder="Text to translate..."></textarea>
+            </th>
+            <th>
+                <textarea id="outputText" name="outputText" rows="10" cols="50" placeholder="Translated text..."></textarea>
+            </th>
+        </tr>
+        <tr>
+            <th align="left">
+                <button type="button" name="translateButton" onclick="doTranslate()">Translate</button>
+                <button type="button" name="clearButton" onclick="clearInputs()">Clear</button>
+            </th>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        document.getElementById("inputText").focus();
+        AWS.config.region = 'us-east-1'; 
+        var ep = new AWS.Endpoint('translate.us-east-1.amazonaws.com');
+        // REMEMBER TO MAKE THESE CREDENTIALS WITH VERY LIMITED PERMISSSIONS
+        // THESE WILL BE VISIBLE TO ANYONE USING YOUR WEBSITE
+        AWS.config.credentials = new AWS.Credentials("REPLACE_WITH_ACESS_KEY", "REPLACE_WITH_SECRET_KEY");
+
+        var translate = new AWS.Translate({endpoint: ep, region: AWS.config.region});
+        var polly = new AWS.Polly();
+
+        function doTranslate() {
+            var inputText = document.getElementById('inputText').value;
+            if (!inputText) {
+                alert("Input text cannot be empty.");
+                exit();
+            }
+
+            // get the language codes
+            var sourceDropdown = document.getElementById("sourceLanguageCodeDropdown");
+            var sourceLanguageCode = sourceDropdown.options[sourceDropdown.selectedIndex].text;
+
+            var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
+            var targetLanguageCode = targetDropdown.options[targetDropdown.selectedIndex].text;
+
+            var params = {
+                Text: inputText,
+                SourceLanguageCode: sourceLanguageCode,
+                TargetLanguageCode: targetLanguageCode
+            };
+
+            translate.translateText(params, function(err, data) {
+                if (err) {
+                    console.log(err, err.stack);
+                    alert("Error calling Amazon Translate. " + err.message);
+                    return;
+                }
+                if (data) {
+                    var outputTextArea = document.getElementById('outputText');
+                    outputTextArea.value = data.TranslatedText;
+                }
+            });
+        }
+
+        function clearInputs() {
+            document.getElementById('inputText').value = "";
+            document.getElementById('outputText').value = "";
+            document.getElementById("sourceLanguageCodeDropdown").value = "en";
+            document.getElementById("targetLanguageCodeDropdown").value = "en";
+        }
+    </script>
+</body>
+
+</html>
