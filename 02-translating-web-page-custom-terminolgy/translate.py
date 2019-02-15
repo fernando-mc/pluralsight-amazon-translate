@@ -2,12 +2,15 @@ import boto3
 import urllib
 from bs4 import BeautifulSoup
 
+WEBSITE_URL = "REPLACE_WITH_URL"
+TERMINOLOGY_NAME = "REPLACE_WITH_NAME"
+
 def translate_text(text, lang_code):
     translate = boto3.client('translate')
     result = translate.translate_text(
         Text=text,
         TerminologyNames=[
-            'CloudFreeCustom',
+            TERMINOLOGY_NAME,
         ],
         SourceLanguageCode='auto',
         TargetLanguageCode=lang_code
@@ -29,7 +32,7 @@ def created_translated_webpage(html, to_lang_code):
         file.write(str(soup))
     print('Finished translating HTML into the language code of: ' + to_lang_code + '\n\n')
 
-with urllib.request.urlopen('http://globotranslatetest1123.s3-website-us-east-1.amazonaws.com/') as f:
+with urllib.request.urlopen(WEBSITE_URL) as f:
     page_html = f.read().decode('utf-8')
 
 for i in ['pt', 'es', 'de']:
