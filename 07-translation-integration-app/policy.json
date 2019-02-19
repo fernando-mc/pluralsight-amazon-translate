@@ -2,8 +2,7 @@
   "Version": "2012-10-17",
   "Statement": [{
     "Action": [
-      "translate:TranslateText",
-      "polly:SynthesizeSpeech"
+      "translate:TranslateText"
     ],
     "Resource": "*",
     "Effect": "Allow"
