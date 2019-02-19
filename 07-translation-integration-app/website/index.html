@@ -57,8 +57,7 @@ Target Language Code:
         AWS.config.credentials = new AWS.Credentials("REPLACE_WITH_ACESS_KEY", "REPLACE_WITH_SECRET_KEY");
 
         var translate = new AWS.Translate({endpoint: ep, region: AWS.config.region});
-        var polly = new AWS.Polly();
-
+        
         function doTranslate() {
             var inputText = document.getElementById('inputText').value;
             if (!inputText) {
