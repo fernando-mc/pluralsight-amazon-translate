@@ -1,6 +1,8 @@
 ## Steps to prepare your Python environment
 
-First, [install Python3](https://www.python.org/downloads/)
+- [Install Python3](https://www.python.org/downloads/)
+- [Install Boto3](https://pypi.org/project/boto3/)
+- [Install BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-beautiful-soup)
 
 Then you can run a few commands in the same directory as this code. The directory is `02-translating-web-page-custom-terminolgy` 
 
