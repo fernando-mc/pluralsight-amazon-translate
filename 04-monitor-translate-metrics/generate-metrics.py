@@ -2,6 +2,7 @@ import boto3
 import random
 import time
 
+
 def translate_text(text, lang_code):
     translate = boto3.client('translate')
     result = translate.translate_text(
@@ -11,10 +12,11 @@ def translate_text(text, lang_code):
     )
     print(
         'Translated text into the language code of ' + lang_code + '.' +
-        '\nSource text: "' + text + '"' + 
+        '\nSource text: "' + text + '"' +
         '\nResult text: "' + result['TranslatedText'] + '"\n'
         )
     return result['TranslatedText']
+
 
 text_segments = [
     "Hello!",
@@ -28,13 +30,13 @@ text_segments = [
     "The end."
 ]
 
-# Generate metrics by randomly translating different text segments 
+# Generate metrics by randomly translating different text segments
 # Randomly select different sized segments to different languages
 i = 0
 while i < 10000:
     i += 1
     translate_text(
-        random.choice(text_segments), 
+        random.choice(text_segments),
         random.choice(['es', 'de', 'pt'])
     )
     time.sleep(1)
