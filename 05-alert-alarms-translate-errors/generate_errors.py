@@ -22,4 +22,4 @@ def fail_translation():
 i = 0
 while i < 100:
     fail_translation()
-    time.sleep(.2)
+    time.sleep(2)
