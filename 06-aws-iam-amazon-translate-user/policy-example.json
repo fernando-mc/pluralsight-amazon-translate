@@ -7,7 +7,7 @@
                 "translate:*",
                 "comprehend:DetectDominantLanguage",
                 "cloudwatch:GetMetricStatistics",
-                "cloudwatch:ListMetrics",
+                "cloudwatch:ListMetrics"
              ],   
             "Resource": "*"
         }
