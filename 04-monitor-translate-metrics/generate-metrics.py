@@ -20,7 +20,7 @@ def translate_text(text, lang_code):
 
 text_segments = [
     "Hello!",
-    "This is Pluralsight!",
+    "This is Plrualsight!",
     "What's your name?",
     "Nice to meet you!",
     "Congratulations!",
